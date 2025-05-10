@@ -1,0 +1,145 @@
+[
+    {
+        "label": "load_dotenv",
+        "importPath": "dotenv",
+        "description": "dotenv",
+        "isExtraImport": true,
+        "detail": "dotenv",
+        "documentation": {}
+    },
+    {
+        "label": "streamlit",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "streamlit",
+        "description": "streamlit",
+        "detail": "streamlit",
+        "documentation": {}
+    },
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "sqlite3",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sqlite3",
+        "description": "sqlite3",
+        "detail": "sqlite3",
+        "documentation": {}
+    },
+    {
+        "label": "google.generativeai",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "google.generativeai",
+        "description": "google.generativeai",
+        "detail": "google.generativeai",
+        "documentation": {}
+    },
+    {
+        "label": "get_gemini_response",
+        "kind": 2,
+        "importPath": "model",
+        "description": "model",
+        "peekOfCode": "def get_gemini_response(question,prompt):\n    model=genai.GenerativeModel('gemini-pro')\n    response=model.generate_content([prompt[0],question])\n    print(\"This is the response from the model: \",response)\n    return response.text\ndef read_sql_data(db,qry):\n    con = sqlite3.Connection(db)\n    cur = con.cursor()\n    cur.execute(qry)\n    data = cur.fetchall()",
+        "detail": "model",
+        "documentation": {}
+    },
+    {
+        "label": "read_sql_data",
+        "kind": 2,
+        "importPath": "model",
+        "description": "model",
+        "peekOfCode": "def read_sql_data(db,qry):\n    con = sqlite3.Connection(db)\n    cur = con.cursor()\n    cur.execute(qry)\n    data = cur.fetchall()\n    con.commit()\n    con.close()\n    return data\nquestion = \"How many rows are in the users table?\"\nsql_query = get_gemini_response(prompt=prompt,question=question)",
+        "detail": "model",
+        "documentation": {}
+    },
+    {
+        "label": "GOOGLE_API_KEY",
+        "kind": 5,
+        "importPath": "model",
+        "description": "model",
+        "peekOfCode": "GOOGLE_API_KEY = os.getenv(\"GOOGLE_API\")\nprint(GOOGLE_API_KEY)\ngenai.configure(api_key=GOOGLE_API_KEY)\n## Function To Load Google Gemini Model and provide queries as response\nprompt=[\n    \"\"\"\n    You are an expert in converting English questions to SQL queries!\n    The SQL database has tables with various columns. The table name will be provided in the question.\n    For example,\n    Example 1 - How many entries of records are present in table users?, ",
+        "detail": "model",
+        "documentation": {}
+    },
+    {
+        "label": "question",
+        "kind": 5,
+        "importPath": "model",
+        "description": "model",
+        "peekOfCode": "question = \"How many rows are in the users table?\"\nsql_query = get_gemini_response(prompt=prompt,question=question)\nprint(f\"Decoded Query: {sql_query}\")\ndata = read_sql_data(db=\"sample.db\",qry=sql_query) \nprint(f\"Data from query: {data}\")",
+        "detail": "model",
+        "documentation": {}
+    },
+    {
+        "label": "sql_query",
+        "kind": 5,
+        "importPath": "model",
+        "description": "model",
+        "peekOfCode": "sql_query = get_gemini_response(prompt=prompt,question=question)\nprint(f\"Decoded Query: {sql_query}\")\ndata = read_sql_data(db=\"sample.db\",qry=sql_query) \nprint(f\"Data from query: {data}\")",
+        "detail": "model",
+        "documentation": {}
+    },
+    {
+        "label": "data",
+        "kind": 5,
+        "importPath": "model",
+        "description": "model",
+        "peekOfCode": "data = read_sql_data(db=\"sample.db\",qry=sql_query) \nprint(f\"Data from query: {data}\")",
+        "detail": "model",
+        "documentation": {}
+    },
+    {
+        "label": "connection",
+        "kind": 5,
+        "importPath": "sql_setup",
+        "description": "sql_setup",
+        "peekOfCode": "connection = sqlite3.connect(\"sample.db\")\ncursor = connection.cursor()\ntable_info = '''\nCREATE TABLE IF NOT EXISTS users (\n    name TEXT NOT NULL,\n    age INTEGER NOT NULL\n);\n'''\ncursor.execute(table_info)\ninsert_query = '''",
+        "detail": "sql_setup",
+        "documentation": {}
+    },
+    {
+        "label": "cursor",
+        "kind": 5,
+        "importPath": "sql_setup",
+        "description": "sql_setup",
+        "peekOfCode": "cursor = connection.cursor()\ntable_info = '''\nCREATE TABLE IF NOT EXISTS users (\n    name TEXT NOT NULL,\n    age INTEGER NOT NULL\n);\n'''\ncursor.execute(table_info)\ninsert_query = '''\nINSERT INTO users (name, age) VALUES",
+        "detail": "sql_setup",
+        "documentation": {}
+    },
+    {
+        "label": "table_info",
+        "kind": 5,
+        "importPath": "sql_setup",
+        "description": "sql_setup",
+        "peekOfCode": "table_info = '''\nCREATE TABLE IF NOT EXISTS users (\n    name TEXT NOT NULL,\n    age INTEGER NOT NULL\n);\n'''\ncursor.execute(table_info)\ninsert_query = '''\nINSERT INTO users (name, age) VALUES\n('Alice', 30),",
+        "detail": "sql_setup",
+        "documentation": {}
+    },
+    {
+        "label": "insert_query",
+        "kind": 5,
+        "importPath": "sql_setup",
+        "description": "sql_setup",
+        "peekOfCode": "insert_query = '''\nINSERT INTO users (name, age) VALUES\n('Alice', 30),\n('Bob', 25),\n('Charlie', 35);\n'''\ncursor.execute(insert_query)\ndata = cursor.execute('''select * from users''')\nprint(\"Row data: \")\nfor row in data:",
+        "detail": "sql_setup",
+        "documentation": {}
+    },
+    {
+        "label": "data",
+        "kind": 5,
+        "importPath": "sql_setup",
+        "description": "sql_setup",
+        "peekOfCode": "data = cursor.execute('''select * from users''')\nprint(\"Row data: \")\nfor row in data:\n    print(row)\nconnection.commit()\nconnection.close()",
+        "detail": "sql_setup",
+        "documentation": {}
+    }
+]

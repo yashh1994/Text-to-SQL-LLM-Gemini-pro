@@ -35,6 +35,7 @@ prompt=[
 def get_gemini_response(question,prompt):
     model=genai.GenerativeModel('gemini-pro')
     response=model.generate_content([prompt[0],question])
+    print("This is the response from the model: ",response)
     return response.text
 
 
